@@ -1,26 +1,39 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
+import {connect} from "react-redux";
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App(props) {
+    const [title, setTitle] = useState('');
+
+    const addTodo = () => {
+        props.addTodo(title);
+        setTitle('');
+    }
+
+    return (
+        <div className="App">
+            React/Redux Todo list
+            <ul>
+                {
+                    props.todos.map((el, idx)=>
+                        <li key={idx}>
+                            {el.title}
+                        </li>
+                    )
+                }
+            </ul>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+            <button onClick={addTodo}>Add</button>
+        </div>
+    );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+    todos: state.todos
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    addTodo: (todo) => dispatch({ type: 'TODO_ADD', payload: todo })
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
