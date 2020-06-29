@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import TodoItem from "./TodoItem";
 
 function App(props) {
-
     const [title, setTitle] = useState('');
 
     const addTodo = () => {
