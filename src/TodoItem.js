@@ -38,7 +38,7 @@ const TodoItem = (props) => {
                 :
                 <>
                     <span onDoubleClick={()=>setEditMode(true)}>
-                        {title}
+                        {todo.title}
                     </span>
                     <button onClick={deleteTodo}>Delete</button>
                 </>
