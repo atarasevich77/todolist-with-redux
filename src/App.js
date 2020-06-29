@@ -1,8 +1,10 @@
 import React, {useState} from 'react';
-import {connect} from "react-redux";
 import './App.css';
+import {connect} from "react-redux";
+import TodoItem from "./TodoItem";
 
 function App(props) {
+
     const [title, setTitle] = useState('');
 
     const addTodo = () => {
@@ -15,25 +17,28 @@ function App(props) {
             React/Redux Todo list
             <ul>
                 {
-                    props.todos.map((el, idx)=>
+                    props.todos.map((el, idx) =>
                         <li key={idx}>
-                            {el.title}
+                            <TodoItem todo={el}/>
                         </li>
                     )
                 }
             </ul>
-            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
             <button onClick={addTodo}>Add</button>
         </div>
     );
 }
 
-const mapStateToProps = (state) => ({
-    todos: state.todos
-});
+const mapStateToProps = (state) => (
+    {todos: state.todos}
+);
 
-const mapDispatchToProps = (dispatch) => ({
-    addTodo: (todo) => dispatch({ type: 'TODO_ADD', payload: todo })
-});
+const mapDispatchToProps = (dispatch) => (
+    {
+        addTodo:
+            (todo) => dispatch({type: 'TODO_ADD', title: todo})
+    }
+);
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
