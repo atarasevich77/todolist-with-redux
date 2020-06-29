@@ -1,12 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {connect} from "react-redux";
 
 const TodoItem = (props) => {
     const todo = props.todo;
+    const [title, setTitle] = useState(todo.title);
+    const [editMode, setEditMode] = useState(false);
 
     const changeStatus = (e) => {
         const updatedTodo = {...todo, done: e.target.checked};
         props.updateTodo(updatedTodo);
+    }
+
+    const changeTitle = () => {
+        const updatedTodo = {...todo, title: title};
+        props.updateTodo(updatedTodo);
+        setEditMode(false);
     }
 
     const deleteTodo = () => {
@@ -16,8 +24,19 @@ const TodoItem = (props) => {
     return (
         <div>
             <input type="checkbox" checked={todo.done} onChange={changeStatus}/>
-            {todo.title}
-            <button onClick={deleteTodo}>Delete</button>
+            {editMode ?
+                <>
+                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    <button onClick={changeTitle}>Update</button>
+                </>
+                :
+                <>
+                    <span onDoubleClick={()=>setEditMode(true)}>
+                        {title}
+                    </span>
+                    <button onClick={deleteTodo}>Delete</button>
+                </>
+            }
         </div>
     );
 };
