@@ -6,6 +6,11 @@ const TodoItem = (props) => {
     const [title, setTitle] = useState(todo.title);
     const [editMode, setEditMode] = useState(false);
 
+    const cancel = () => {
+        setTitle(props.todo.title);
+        setEditMode(false);
+    }
+
     const changeStatus = (e) => {
         const updatedTodo = {...todo, done: e.target.checked};
         props.updateTodo(updatedTodo);
@@ -28,6 +33,7 @@ const TodoItem = (props) => {
                 <>
                     <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
                     <button onClick={changeTitle}>Update</button>
+                    <button onClick={cancel}>Cancel</button>
                 </>
                 :
                 <>
