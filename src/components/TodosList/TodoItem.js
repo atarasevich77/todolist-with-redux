@@ -1,13 +1,16 @@
 import React, {useState} from 'react';
+import api from '../../api/config';
 import {connect} from "react-redux";
 
 const TodoItem = (props) => {
     const todo = props.todo;
-    const [title, setTitle] = useState(todo.title);
+    const [name, setName] = useState(todo.name);
+    const [description, setDescription] = useState(todo.description);
     const [editMode, setEditMode] = useState(false);
 
     const cancel = () => {
-        setTitle(props.todo.title);
+        setName(props.todo.name);
+        setDescription(props.todo.description);
         setEditMode(false);
     }
 
@@ -17,13 +20,22 @@ const TodoItem = (props) => {
     }
 
     const changeTitle = () => {
-        const updatedTodo = {...todo, title: title};
-        props.updateTodo(updatedTodo);
-        setEditMode(false);
+        // const updatedTodo = {...todo, title: title};
+        // props.updateTodo(updatedTodo);
+        // setEditMode(false);
     }
 
     const deleteTodo = () => {
-        props.deleteTodo(todo);
+        // e.preventDefault();
+        const id = todo._id;
+        api.delete(`todo/${id}`)
+            .then(() => {
+                props.deleteTodo(id);
+            })
+            .catch(error =>{
+                console.log(error)
+                props.getError(error)
+            })
     }
 
     return (
@@ -31,14 +43,16 @@ const TodoItem = (props) => {
             <input type="checkbox" checked={todo.done} onChange={changeStatus}/>
             {editMode ?
                 <>
-                    <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                    <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
                     <button onClick={changeTitle}>Update</button>
                     <button onClick={cancel}>Cancel</button>
                 </>
                 :
                 <>
                     <span onDoubleClick={()=>setEditMode(true)}>
-                        {todo.title}
+                        {todo.name}
+                        &nbsp;
+                        {todo.description}
                     </span>
                     <button onClick={deleteTodo}>Delete</button>
                 </>
@@ -53,8 +67,9 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateTodo: (todo) => dispatch({type: 'TODO_UPDATE', todo: todo}),
-        deleteTodo: (todo) => dispatch({type: 'TODO_DELETE', todo: todo._id})
+        updateTodo: (todo) => dispatch({type: 'API_TODO_UPDATE', payload: todo}),
+        deleteTodo: (id) => dispatch({type: 'API_TODO_DELETE', id: id}),
+        getError: (error) => dispatch({type: 'API_TODO_ERROR', payload: error})
     }
 };
 

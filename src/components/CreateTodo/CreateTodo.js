@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import api from '../../api/config';
 import {connect} from "react-redux";
+import {fetchCreateTodo} from "../../redux/actions";
 
 const CreateTodo = (props) => {
     const [isValidData, setIsValidData] = useState(false);
@@ -9,20 +9,7 @@ const CreateTodo = (props) => {
 
     const addTodo = (e) => {
         e.preventDefault();
-        api.post('todo',
-            {
-                name: name,
-                description: description
-            })
-            .then(() => {
-                props.addTodo({name: name, description: description});
-                setName('');
-                setDescription('');
-            })
-            .catch(error => {
-                console.log(error)
-                props.getError(error);
-            });
+        props.addTodo({name: name, description: description});
     }
 
     return (
@@ -58,8 +45,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTodo: (todo) => dispatch({type: 'API_TODO_ADD', payload: todo}),
-        getError: (error) => dispatch({type: 'API_TODO_ERROR', payload: error})
+        addTodo: (todo) => dispatch(fetchCreateTodo(todo)),
     }
 };
 

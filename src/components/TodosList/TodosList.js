@@ -1,19 +1,12 @@
 import React, {useEffect} from 'react';
-import api from '../../api/config';
 import {connect} from "react-redux";
 import TodoItem from "./TodoItem";
+import { fetchTodos } from '../../redux/actions';
 
 const TodosList = (props) => {
 
     useEffect(() => {
-        api.get('todo')
-            .then(response => {
-                props.getData(response.data);
-            })
-            .catch(error =>
-                props.getError(error)
-            )
-        ;
+        props.initData()
     }, []);
 
     return (
@@ -35,8 +28,7 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getData: (data) => dispatch({type: 'API_TODO_INIT', payload: data}),
-        getError: (error) => dispatch({type: 'API_TODO_ERROR', payload: error})
+        initData: () => dispatch(fetchTodos()),
     }
 };
 

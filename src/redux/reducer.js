@@ -1,4 +1,4 @@
-import api from "../api/config";
+import * as actions from '../redux/actions';
 
 const initTodos = {
     todos: [],
@@ -7,34 +7,42 @@ const initTodos = {
 
 const todos = (state = initTodos, action) => {
     switch (action.type) {
-        case 'API_TODO_INIT':
+        case actions.GET_TODOS:
+            console.log(action.payload)
             return {
                 ...state,
                 todos: action.payload,
-                severConnect: true,
-            };
-        case 'API_TODO_ADD':
-            return {...state,
-                todos: [...state.todos, action.payload]
-            };
-        case 'API_TODO_ERROR':
-            return {
-                ...state,
-                severConnect: false,
+                severConnect: true
             };
 
-        // case 'TODO_UPDATE':
-        //     const updatedState = state.todos.map(todo => {
-        //         if(todo._id === action.todo._id){
-        //             return action.todo;
-        //         } else {
-        //             return todo;
-        //         }
-        //     });
-        //     return {...state, todos: updatedState};
-        // case 'TODO_DELETE':
-        //     const filteredState = state.todos.filter(todo => todo._id !== action.id);
-        //     return {...state, todos: filteredState};
+        case actions.POST_CREATE_TODO:
+            return {...state,
+                todos: [...state.todos, action.payload],
+                severConnect: true
+            };
+        case 'API_TODO_UPDATE':
+            const updatedState = state.todos.map(todo => {
+                if(todo._id === action.todo._id){
+                    return action.todo;
+                } else {
+                    return todo;
+                }
+            });
+            return {...state,
+                todos: updatedState,
+                severConnect: true
+            };
+        case 'API_TODO_DELETE':
+            const filteredState = state.todos.filter(todo => todo._id !== action.id);
+            return {...state,
+                todos: filteredState,
+                severConnect: true
+            };
+        case actions.GET_FAILURE:
+            return {
+                ...state,
+                severConnect: false
+            };
         default:
             return state;
     }
