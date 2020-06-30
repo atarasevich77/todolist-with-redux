@@ -54,7 +54,7 @@ const mapStateToProps = (state) => (
 const mapDispatchToProps = (dispatch) => {
     return {
         updateTodo: (todo) => dispatch({type: 'TODO_UPDATE', todo: todo}),
-        deleteTodo: (todo) => dispatch({type: 'TODO_DELETE', todo: todo})
+        deleteTodo: (todo) => dispatch({type: 'TODO_DELETE', todo: todo._id})
     }
 };
 

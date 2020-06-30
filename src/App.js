@@ -5,13 +5,13 @@ import TodosList from "./components/TodosList/TodosList";
 
 function App(props) {
     const serverStatus = {
-        color: props.serverConnect ? 'green' : 'red'
+        color: props.severConnect ? 'green' : 'red'
     }
 
     return (
         <div className="container">
             <div className="row justify-content-sm-end">
-                Server status: &nbsp; <span style={serverStatus}>{props.serverConnect ? 'Ok' : 'Down'}</span>
+                Server status: &nbsp; <span style={serverStatus}>{props.severConnect ? 'Ok' : 'Down'}</span>
             </div>
             <h2 className="text-center p-3">React/Redux Todo list</h2>
             <div className="row justify-content-center p-2">
@@ -24,7 +24,7 @@ function App(props) {
     );
 }
 const mapStateToProps = (state) => (
-    {serverConnect: state.serverConnect}
+    {severConnect: state.severConnect}
 );
 
 export default connect(mapStateToProps, null)(App);
