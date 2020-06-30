@@ -2,6 +2,7 @@
 let id = 0;
 
 const initTodos = {
+    serverConnect: false,
     todos: [
         {id: ++id, title: 'First', done: false},
         {id: ++id, title: 'Second', done: true}
