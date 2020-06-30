@@ -8,6 +8,10 @@ React project todolist with redux and axios works with node.js server (you can f
 
 In the project directory, you can run:
 
+### `npm install`
+
+Install all dependencies what need for work this project
+
 ### `npm start`
 
 Runs the app in the development mode.<br />
