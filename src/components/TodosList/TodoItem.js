@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import api from '../../api/config';
 import {connect} from "react-redux";
+import {fetchDeleteTodo} from "../../redux/actions";
 
 const TodoItem = (props) => {
     const todo = props.todo;
@@ -25,17 +25,10 @@ const TodoItem = (props) => {
         // setEditMode(false);
     }
 
-    const deleteTodo = () => {
-        // e.preventDefault();
+    const deleteTodo = (e) => {
+        e.preventDefault();
         const id = todo._id;
-        api.delete(`todo/${id}`)
-            .then(() => {
-                props.deleteTodo(id);
-            })
-            .catch(error =>{
-                console.log(error)
-                props.getError(error)
-            })
+        props.deleteTodo(id);
     }
 
     return (
@@ -68,8 +61,7 @@ const mapStateToProps = (state) => (
 const mapDispatchToProps = (dispatch) => {
     return {
         updateTodo: (todo) => dispatch({type: 'API_TODO_UPDATE', payload: todo}),
-        deleteTodo: (id) => dispatch({type: 'API_TODO_DELETE', id: id}),
-        getError: (error) => dispatch({type: 'API_TODO_ERROR', payload: error})
+        deleteTodo: (id) => dispatch(fetchDeleteTodo(id)),
     }
 };
 

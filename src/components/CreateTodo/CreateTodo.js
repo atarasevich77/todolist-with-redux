@@ -10,6 +10,8 @@ const CreateTodo = (props) => {
     const addTodo = (e) => {
         e.preventDefault();
         props.addTodo({name: name, description: description});
+        setName('');
+        setDescription('');
     }
 
     return (

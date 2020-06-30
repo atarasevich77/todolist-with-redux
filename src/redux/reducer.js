@@ -32,7 +32,7 @@ const todos = (state = initTodos, action) => {
                 todos: updatedState,
                 severConnect: true
             };
-        case 'API_TODO_DELETE':
+        case actions.DELETE_TODO:
             const filteredState = state.todos.filter(todo => todo._id !== action.id);
             return {...state,
                 todos: filteredState,

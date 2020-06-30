@@ -3,7 +3,7 @@ import api from '../api/config';
 export const GET_TODOS = 'GET_TODOS';
 export const POST_CREATE_TODO = 'POST_CREATE_TODO';
 // export const GET_TODOS = 'GET_TODOS';
-// export const GET_TODOS = 'GET_TODOS';
+export const DELETE_TODO = 'DELETE_TODO';
 export const GET_FAILURE = 'GET_FAILURE';
 
 export const getFailure = () => ({
@@ -42,6 +42,24 @@ export function fetchCreateTodo(todo) {
             .then(() => {
                 dispatch(fetchTodos());
                 dispatch(createTodo(todo));
+            })
+            .catch(() => {
+                dispatch(getFailure());
+            })
+    }
+}
+
+export const deleteTodo = (id) => ({
+    type: DELETE_TODO,
+    payload: id
+});
+
+export function fetchDeleteTodo(id) {
+    return async (dispatch) => {
+        api.delete(`todo/${id}`)
+            .then(() => {
+                dispatch(fetchTodos());
+                dispatch(deleteTodo(id));
             })
             .catch(() => {
                 dispatch(getFailure());
