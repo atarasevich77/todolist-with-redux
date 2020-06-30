@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
-import {fetchDeleteTodo} from "../../redux/actions";
+import {fetchDeleteTodo, fetchStatusUpdateTodo} from "../../api/fetchData";
 
 const TodoItem = (props) => {
     const todo = props.todo;
@@ -15,8 +15,9 @@ const TodoItem = (props) => {
     }
 
     const changeStatus = (e) => {
-        const updatedTodo = {...todo, done: e.target.checked};
-        props.updateTodo(updatedTodo);
+        e.preventDefault();
+        const id = todo._id;
+        props.updateStatus({id: id, status: e.target.checked});
     }
 
     const changeTitle = () => {
@@ -37,6 +38,7 @@ const TodoItem = (props) => {
             {editMode ?
                 <>
                     <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
+                    <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
                     <button onClick={changeTitle}>Update</button>
                     <button onClick={cancel}>Cancel</button>
                 </>
@@ -60,7 +62,8 @@ const mapStateToProps = (state) => (
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updateTodo: (todo) => dispatch({type: 'API_TODO_UPDATE', payload: todo}),
+        // updateTodo: (todo) => dispatch({type: 'API_TODO_UPDATE', payload: todo}),
+        updateStatus: (data) => dispatch(fetchStatusUpdateTodo(data)),
         deleteTodo: (id) => dispatch(fetchDeleteTodo(id)),
     }
 };

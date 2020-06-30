@@ -14,24 +14,35 @@ const todos = (state = initTodos, action) => {
                 todos: action.payload,
                 severConnect: true
             };
-
         case actions.POST_CREATE_TODO:
             return {...state,
                 todos: [...state.todos, action.payload],
                 severConnect: true
             };
-        case 'API_TODO_UPDATE':
-            const updatedState = state.todos.map(todo => {
-                if(todo._id === action.todo._id){
-                    return action.todo;
+        case actions.PUT_STATUS_UPDATE_TODO:
+            const updatedStatus = state.todos.map(todo => {
+                if(todo._id === action.payload.id){
+                    return {...todo, done: action.payload.status}
                 } else {
                     return todo;
                 }
             });
             return {...state,
-                todos: updatedState,
+                todos: updatedStatus,
                 severConnect: true
             };
+        // case 'API_TODO_UPDATE':
+        //     const updatedState = state.todos.map(todo => {
+        //         if(todo._id === action.todo._id){
+        //             return action.todo;
+        //         } else {
+        //             return todo;
+        //         }
+        //     });
+        //     return {...state,
+        //         todos: updatedState,
+        //         severConnect: true
+        //     };
         case actions.DELETE_TODO:
             const filteredState = state.todos.filter(todo => todo._id !== action.id);
             return {...state,

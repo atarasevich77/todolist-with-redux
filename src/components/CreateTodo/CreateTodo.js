@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
-import {fetchCreateTodo} from "../../redux/actions";
+import {fetchCreateTodo} from "../../api/fetchData";
 
 const CreateTodo = (props) => {
     const [isValidData, setIsValidData] = useState(false);

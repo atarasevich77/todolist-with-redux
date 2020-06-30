@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {connect} from "react-redux";
 import TodoItem from "./TodoItem";
-import { fetchTodos } from '../../redux/actions';
+import {fetchTodos} from "../../api/fetchData";
 
 const TodosList = (props) => {
 
