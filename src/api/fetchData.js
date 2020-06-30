@@ -1,5 +1,12 @@
 import api from "./config";
-import {createTodo, deleteTodo, getFailure, getTodos, updateStatusTodo} from "../redux/actions";
+import {
+    createTodo,
+    deleteTodo,
+    getFailure,
+    getTodos,
+    updateStatusTodo,
+    updateTodo
+} from "../redux/actions";
 
 export function fetchTodos() {
     return async (dispatch) => {
@@ -38,6 +45,22 @@ export function fetchStatusUpdateTodo({id, status}) {
             })
             .then(() => {
                 dispatch(updateStatusTodo({id, status}));
+            })
+            .catch(error => {
+                dispatch(getFailure(error));
+            })
+    }
+}
+
+export function fetchUpdateTodo(todo) {
+    return async (dispatch) => {
+        api.patch(`todo/${todo._id}`,
+            {
+                name: todo.name,
+                description: todo.description
+            })
+            .then(() => {
+                dispatch(updateTodo(todo));
             })
             .catch(error => {
                 dispatch(getFailure(error));

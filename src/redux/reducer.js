@@ -31,18 +31,18 @@ const todos = (state = initTodos, action) => {
                 todos: updatedStatus,
                 severConnect: true
             };
-        // case 'API_TODO_UPDATE':
-        //     const updatedState = state.todos.map(todo => {
-        //         if(todo._id === action.todo._id){
-        //             return action.todo;
-        //         } else {
-        //             return todo;
-        //         }
-        //     });
-        //     return {...state,
-        //         todos: updatedState,
-        //         severConnect: true
-        //     };
+        case 'PATCH_UPDATE_TODO':
+            const updatedState = state.todos.map(todo => {
+                if(todo._id === action.payload._id){
+                    return action.payload;
+                } else {
+                    return todo;
+                }
+            });
+            return {...state,
+                todos: updatedState,
+                severConnect: true
+            };
         case actions.DELETE_TODO:
             const filteredState = state.todos.filter(todo => todo._id !== action.id);
             return {...state,
