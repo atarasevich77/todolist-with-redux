@@ -20,7 +20,8 @@ const TodoItem = (props) => {
         props.updateStatus({id: id, status: e.target.checked});
     }
 
-    const updateTodo = () => {
+    const updateTodo = (e) => {
+        e.preventDefault();
         const updatedTodo = {...todo, name: name, description: description};
         props.updateTodo(updatedTodo);
         setEditMode(false);
