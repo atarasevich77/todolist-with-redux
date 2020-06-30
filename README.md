@@ -2,7 +2,7 @@
 https://kano-kenji.github.io/todolist-with-redux/
 
 ## Description
-React project todolist with redux and axios works with node.js server (you can find it here: https://github.com/kano-kenji/todo-serv)
+React project simple todolist with redux and axios works with node.js server (you can find it here: https://github.com/kano-kenji/todo-serv)
 
 ## Available Scripts
 
