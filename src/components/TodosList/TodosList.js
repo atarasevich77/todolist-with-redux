@@ -13,7 +13,7 @@ const TodosList = (props) => {
         <ul className="list-group w-75">
             {
                 props.todos.map((el, idx) =>
-                    <li key={idx} className="list-group-item">
+                    <li key={idx} className={el.done ? 'list-group-item list-group-item-success' : 'list-group-item'}>
                         <TodoItem todo={el}/>
                     </li>
                 )
