@@ -8,7 +8,6 @@ const initTodos = {
 const todos = (state = initTodos, action) => {
     switch (action.type) {
         case actions.GET_TODOS:
-            console.log(action.payload)
             return {
                 ...state,
                 todos: action.payload,
