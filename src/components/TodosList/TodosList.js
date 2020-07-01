@@ -10,10 +10,10 @@ const TodosList = (props) => {
     }, []);
 
     return (
-        <ul>
+        <ul className="list-group w-75">
             {
                 props.todos.map((el, idx) =>
-                    <li key={idx}>
+                    <li key={idx} className="list-group-item">
                         <TodoItem todo={el}/>
                     </li>
                 )

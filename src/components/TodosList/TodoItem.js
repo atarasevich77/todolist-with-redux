@@ -34,26 +34,36 @@ const TodoItem = (props) => {
     }
 
     return (
-        <div>
-            <input type="checkbox" checked={todo.done} onChange={changeStatus}/>
+        <span onDoubleClick={()=>setEditMode(true)}>
+            <div className="input-group flex-nowrap p-2">
+                <div className="input-group-prepend">
+                    <div className="input-group-text">
+                        <input type="checkbox" checked={todo.done} onChange={changeStatus} />
+                    </div>
+                </div>
+                {editMode ?
+                    <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
+                    :
+                    <>
+                        <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} readOnly="readonly"/>
+                        <div className="input-group-append">
+                            <button className="btn btn-secondary" onClick={deleteTodo}>Delete</button>
+                        </div>
+                    </>
+                }
+            </div>
             {editMode ?
                 <>
-                    <input type="text" value={name} onChange={(e) => setName(e.target.value)}/>
-                    <input type="text" value={description} onChange={(e) => setDescription(e.target.value)}/>
-                    <button onClick={updateTodo}>Update</button>
-                    <button onClick={cancel}>Cancel</button>
+                    <textarea className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} />
+                    <div className="row justify-content-end">
+                        <button className="btn btn-success m-2" onClick={updateTodo}>Update</button>
+                        <button className="btn btn-secondary m-2" onClick={cancel}>Cancel</button>
+                    </div>
                 </>
                 :
-                <>
-                    <span onDoubleClick={()=>setEditMode(true)}>
-                        {todo.name}
-                        &nbsp;
-                        {todo.description}
-                    </span>
-                    <button onClick={deleteTodo}>Delete</button>
-                </>
+                <textarea className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} readOnly="readonly" />
             }
-        </div>
+        </span>
     );
 };
 
