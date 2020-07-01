@@ -61,7 +61,7 @@ const TodoItem = (props) => {
                     </div>
                 </>
                 :
-                <textarea className="form-control" value={todo.description} readOnly="readonly" />
+                <textarea className="form-control-plaintext pl-2" value={todo.description} readOnly="readonly" />
             }
         </span>
     );
