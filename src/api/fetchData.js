@@ -1,12 +1,5 @@
 import api from "./config";
-import {
-    createTodo,
-    deleteTodo,
-    getFailure,
-    getTodos,
-    updateStatusTodo,
-    updateTodo
-} from "../redux/actions";
+import {getTodos, getFailure} from "../redux/actions";
 
 export function fetchTodos() {
     return async (dispatch) => {
@@ -29,7 +22,6 @@ export function fetchCreateTodo(todo) {
             })
             .then(() => {
                 dispatch(fetchTodos());
-                dispatch(createTodo(todo));
             })
             .catch(error => {
                 dispatch(getFailure(error));
@@ -44,7 +36,7 @@ export function fetchStatusUpdateTodo({id, status}) {
                 done: status
             })
             .then(() => {
-                dispatch(updateStatusTodo({id, status}));
+                dispatch(fetchTodos());
             })
             .catch(error => {
                 dispatch(getFailure(error));
@@ -60,7 +52,7 @@ export function fetchUpdateTodo(todo) {
                 description: todo.description
             })
             .then(() => {
-                dispatch(updateTodo(todo));
+                dispatch(fetchTodos());
             })
             .catch(error => {
                 dispatch(getFailure(error));
@@ -72,7 +64,6 @@ export function fetchDeleteTodo(id) {
     return async (dispatch) => {
         api.delete(`todo/${id}`)
             .then(() => {
-                dispatch(deleteTodo(id));
                 dispatch(fetchTodos());
             })
             .catch(error => {
