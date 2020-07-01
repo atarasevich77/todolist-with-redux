@@ -16,8 +16,7 @@ const TodoItem = (props) => {
 
     const changeStatus = (e) => {
         e.preventDefault();
-        const id = todo._id;
-        props.updateStatus({id: id, status: e.target.checked});
+        props.updateStatus({id: todo._id, status: e.target.checked});
     }
 
     const updateTodo = (e) => {
@@ -29,8 +28,7 @@ const TodoItem = (props) => {
 
     const deleteTodo = (e) => {
         e.preventDefault();
-        const id = todo._id;
-        props.deleteTodo(id);
+        props.deleteTodo(todo._id);
     }
 
     return (
