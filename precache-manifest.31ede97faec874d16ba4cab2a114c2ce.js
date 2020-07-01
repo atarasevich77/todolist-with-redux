@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6794e04d56dce2b9687aaeb2020ed077",
+    "revision": "7dbcfd6ca3f252792a8e56221814e910",
     "url": "/todolist-with-redux/index.html"
   },
   {
-    "revision": "d41643ba5c426576240c",
+    "revision": "e1c0efbb4925eaf99d76",
     "url": "/todolist-with-redux/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "36d2e94f016c5dc80d6d",
+    "revision": "4fc6a85d21fde9f5049f",
     "url": "/todolist-with-redux/static/css/main.5ecd60fb.chunk.css"
   },
   {
-    "revision": "d41643ba5c426576240c",
-    "url": "/todolist-with-redux/static/js/2.515383a0.chunk.js"
+    "revision": "e1c0efbb4925eaf99d76",
+    "url": "/todolist-with-redux/static/js/2.42fc21eb.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/todolist-with-redux/static/js/2.515383a0.chunk.js.LICENSE.txt"
+    "url": "/todolist-with-redux/static/js/2.42fc21eb.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "36d2e94f016c5dc80d6d",
-    "url": "/todolist-with-redux/static/js/main.409c38db.chunk.js"
+    "revision": "4fc6a85d21fde9f5049f",
+    "url": "/todolist-with-redux/static/js/main.b8e02d1d.chunk.js"
   },
   {
     "revision": "d13c8abed09efd5ee227",
