@@ -45,7 +45,7 @@ const TodoItem = (props) => {
                     <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} />
                     :
                     <>
-                        <input type="text" className="form-control" value={name} onChange={(e) => setName(e.target.value)} readOnly="readonly"/>
+                        <input type="text" className="form-control" value={todo.name} readOnly="readonly"/>
                         <div className="input-group-append">
                             <button className="btn btn-secondary" onClick={deleteTodo}>Delete</button>
                         </div>
@@ -61,7 +61,7 @@ const TodoItem = (props) => {
                     </div>
                 </>
                 :
-                <textarea className="form-control" value={description} onChange={(e) => setDescription(e.target.value)} readOnly="readonly" />
+                <textarea className="form-control" value={todo.description} readOnly="readonly" />
             }
         </span>
     );

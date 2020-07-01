@@ -2,7 +2,7 @@ import api from "./config";
 import {getTodos, getFailure} from "../redux/actions";
 
 export function fetchTodos() {
-    return async (dispatch) => {
+    return (dispatch) => {
         api.get('todo')
             .then(response => {
                 dispatch(getTodos(response.data));
@@ -14,7 +14,7 @@ export function fetchTodos() {
 }
 
 export function fetchCreateTodo(todo) {
-    return async (dispatch) => {
+    return (dispatch) => {
         api.post('todo',
             {
                 name: todo.name,
@@ -30,7 +30,7 @@ export function fetchCreateTodo(todo) {
 }
 
 export function fetchStatusUpdateTodo({id, status}) {
-    return async (dispatch) => {
+    return (dispatch) => {
         api.put(`todo/${id}`,
             {
                 done: status
@@ -45,7 +45,7 @@ export function fetchStatusUpdateTodo({id, status}) {
 }
 
 export function fetchUpdateTodo(todo) {
-    return async (dispatch) => {
+    return (dispatch) => {
         api.patch(`todo/${todo._id}`,
             {
                 name: todo.name,
@@ -61,7 +61,7 @@ export function fetchUpdateTodo(todo) {
 }
 
 export function fetchDeleteTodo(id) {
-    return async (dispatch) => {
+    return (dispatch) => {
         api.delete(`todo/${id}`)
             .then(() => {
                 dispatch(fetchTodos());
