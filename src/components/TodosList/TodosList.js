@@ -6,7 +6,7 @@ import {fetchTodos} from "../../api/fetchData";
 const TodosList = (props) => {
 
     useEffect(() => {
-        props.initData()
+        props.initData();
     }, []);
 
     return (
