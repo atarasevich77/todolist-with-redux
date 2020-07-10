@@ -2,6 +2,11 @@ import React from 'react';
 import {connect} from "react-redux";
 import CreateTodo from "./components/CreateTodo/CreateTodo";
 import TodosList from "./components/TodosList/TodosList";
+import NProgress from "nprogress";
+
+NProgress.configure({
+    minimum: 0.1
+});
 
 function App(props) {
     const serverStatus = {

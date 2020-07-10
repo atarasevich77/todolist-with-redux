@@ -1,8 +1,10 @@
 import api from "./config";
+import NProgress from 'nprogress';
 import {getTodos, getFailure} from "../redux/actions";
 
 export function fetchTodos() {
     return (dispatch) => {
+        NProgress.start();
         api.get('todo')
             .then(response => {
                 dispatch(getTodos(response.data));
@@ -10,6 +12,7 @@ export function fetchTodos() {
             .catch(error => {
                 dispatch(getFailure(error));
             })
+        NProgress.done();
     }
 }
 
