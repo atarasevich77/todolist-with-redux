@@ -2,7 +2,8 @@ import * as actions from '../redux/actions';
 
 const initTodos = {
     todos: [],
-    severConnect: false
+    severConnect: false,
+    errors: null
 };
 
 const todos = (state = initTodos, action) => {
@@ -16,7 +17,8 @@ const todos = (state = initTodos, action) => {
         case actions.GET_FAILURE:
             return {
                 ...state,
-                severConnect: false
+                severConnect: false,
+                errors: action.payload
             };
         default:
             return state;
